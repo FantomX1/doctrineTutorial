@@ -63,6 +63,12 @@ class Bug
      */
     protected $reporter;
 
+
+    public function close()
+    {
+        $this->status = "CLOSE";
+    }
+
     /**
      * @return mixed
      */
