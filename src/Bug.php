@@ -1,0 +1,179 @@
+<?php
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+
+
+class Bug
+{
+
+
+    /**
+     * @ORM\ID
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     * @var int
+     */
+    protected $id;
+
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     *
+     */
+    protected $description;
+
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var DateTime
+     */
+    protected $created;
+
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $status;
+
+
+
+    protected $products;
+
+
+    protected $engineer;
+
+    protected $reporter;
+
+    /**
+     * @return mixed
+     */
+    public function getEngineer()
+    {
+        return $this->engineer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReporter()
+    {
+        return $this->reporter;
+    }
+
+    public function setEngineer(User $engineer)
+    {
+
+        $engineer->assignedToBug($this);
+        //@TODO:
+        $this->engineer = $engineer;
+    }
+
+
+    public function setReporter(User $reporter)
+    {
+        $reporter->addReportedBug($this);
+        // @TODO:
+        $this->reporter = $reporter;
+    }
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
