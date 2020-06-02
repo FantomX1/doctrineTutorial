@@ -41,12 +41,23 @@ class Bug
     protected $status;
 
 
-
+    /**
+     * @ORM\ManyToMany(targetEntity="Product")
+     * @var ArrayCollection
+     */
     protected $products;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedBugs")
+     * @var
+     */
     protected $engineer;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="reportedBugs")
+     * @var
+     */
     protected $reporter;
 
     /**
@@ -79,6 +90,19 @@ class Bug
         $reporter->addReportedBug($this);
         // @TODO:
         $this->reporter = $reporter;
+    }
+
+
+    public function assignToProduct(Product $product)
+    {
+
+        $this->products[] = $product;
+    }
+
+
+    public function getProducts()
+    {
+        return $this->products;
     }
 
     public function __construct()
